@@ -1,0 +1,195 @@
+---
+title: "Data608 HW3 Shinny"
+author: "Chunhui Zhu"
+date: "October 4, 2018"
+output: pdf_document
+---
+
+##Data608 HW3 Shinny
+
+
+```{r}
+library("ggplot2")
+library("dplyr")
+library("plotly")
+library("shiny")
+```
+
+```{r}
+df <- read.csv('https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module3/data/cleaned-cdc-mortality-1999-2010-2.csv')
+
+
+
+
+ui <- fluidPage(
+  headerPanel('CDC Mortality 1999-2010'),
+  
+  
+  sidebarPanel(
+    selectInput('icd', 'ICD.Chapter', unique(df$ICD.Chapter), selected='Certain infectious and parasitic diseases'),
+    selectInput('stat', 'State', unique(df$State), selected='AL')
+  ),
+  
+  
+  mainPanel(
+    plotOutput('plot1'),
+    verbatimTextOutput('stats')
+  )
+)
+
+
+server <- shinyServer(function(input, output, session) {
+  
+  selectedData <- reactive({
+    dfSlice <- df %>%
+      filter(ICD.Chapter == input$icd, State== input$stat)
+  })
+  
+  
+  
+  output$plot1 <- renderPlot(
+    
+    {
+    
+    dfSlice <- df %>%
+       filter(ICD.Chapter == input$icd, State== input$stat)
+    
+    ggplot(selectedData(), aes(x = Year, y = Deaths))+ 
+      geom_line()
+    
+  })
+  
+  
+  output$stats <- renderPrint({
+    dfSliceTier <- selectedData() 
+    summary(dfSliceTier$Deaths)
+    
+  })
+  
+  
+  
+  
+})
+
+
+
+shinyApp(ui = ui, server = server)
+```
+```{r}
+df <- read.csv('https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module3/data/cleaned-cdc-mortality-1999-2010-2.csv')
+
+
+
+
+ui <- fluidPage(
+  headerPanel('CDC Mortality 1999-2010'),
+  
+  
+  sidebarPanel(
+    selectInput('icd', 'ICD.Chapter', unique(df$ICD.Chapter), selected='Certain infectious and parasitic diseases'),
+    selectInput('stat', 'State', unique(df$State), selected='AL')
+  ),
+  
+  
+  mainPanel(
+    plotOutput('plot1'),
+    verbatimTextOutput('stats')
+  )
+)
+
+
+server <- shinyServer(function(input, output, session) {
+  
+  selectedData <- reactive({
+    dfSlice <- df %>%
+      filter(ICD.Chapter == input$icd, State== input$stat)
+  })
+  
+  
+  
+  output$plot1 <- renderPlot(
+    
+    {
+    
+    dfSlice <- df %>%
+       filter(ICD.Chapter == input$icd, State== input$stat)
+    
+    ggplot(selectedData(), aes(x = Year, y = Population))+ 
+      geom_line()
+    
+  })
+  
+  
+  output$stats <- renderPrint({
+    dfSliceTier <- selectedData() 
+    summary(dfSliceTier$Population)
+    
+  })
+  
+  
+  
+  
+})
+
+
+
+shinyApp(ui = ui, server = server)
+```
+
+
+```{r}
+
+ui <- fluidPage(
+  headerPanel('CDC Mortality 1999-2010'),
+  
+  
+  sidebarPanel(
+    selectInput('icd', 'ICD.Chapter', unique(df$ICD.Chapter), selected='Certain infectious and parasitic diseases'),
+    selectInput('stat', 'State', unique(df$State), selected='AL')
+  ),
+  
+  
+  mainPanel(
+    plotOutput('plot1'),
+    verbatimTextOutput('stats')
+  )
+)
+
+
+server <- shinyServer(function(input, output, session) {
+  
+  selectedData <- reactive({
+    dfSlice <- df %>%
+      filter(ICD.Chapter == input$icd, State== input$stat)
+  })
+  
+  
+  
+  output$plot1 <- renderPlot(
+    
+    {
+    
+    dfSlice <- df %>%
+       filter(ICD.Chapter == input$icd, State== input$stat)
+    
+    ggplot(selectedData(), aes(x = Year, y = Crude.Rate))+ 
+      geom_line()
+    
+  })
+  
+  
+  output$stats <- renderPrint({
+    dfSliceTier <- selectedData() 
+    summary(dfSliceTier$Crude.Rate)
+    
+  })
+  
+  
+  
+  
+})
+
+
+
+shinyApp(ui = ui, server = server)
+```
