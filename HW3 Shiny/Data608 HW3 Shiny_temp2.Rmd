@@ -1,0 +1,129 @@
+---
+title: "HW3.shinyApp_temp"
+author: "Chunhui Zhu"
+date: "October 14, 2018"
+output: html_document
+runtime: shiny
+---
+
+
+```{r, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(shiny)
+library(shinydashboard)
+```
+
+
+```{r}
+df <- read.csv('https://raw.githubusercontent.com/charleyferrari/CUNY_DATA_608/master/module3/data/cleaned-cdc-mortality-1999-2010-2.csv')
+df$Deaths_Rate <-  as.double(df$Deaths/df$Population*1000)
+df$Year <- as.factor(df$Year)
+df$nation_Death_Rate <- ave(df$Deaths_Rate,df$Year)
+df$state_nation_diffRate<-df$Deaths_Rate-df$nation_Death_Rate
+  
+```
+
+
+
+```{r}
+ui <- fluidPage(
+  headerPanel('CDC Mortality 1999-2010'),
+  
+  
+  sidebarPanel(
+    selectInput('icd', 'ICD.Chapter', unique(df$ICD.Chapter), selected = 'Certain infectious and parasitic diseases'),
+    selectInput('year', 'Year', unique(df$Year),selected = '2010')
+  ),
+  
+  
+  mainPanel(
+    plotOutput('plot1')
+  )
+)
+
+
+server <- shinyServer(function(input, output, session) {
+  
+  selectedData <- reactive({
+    dfSlice <- df %>%
+      filter(ICD.Chapter == input$icd, Year == input$year)   
+  })
+  
+
+  
+  output$plot1 <- renderPlot(
+    
+    {
+    
+    dfSlice <- df %>%
+       filter(ICD.Chapter == input$icd, Year == input$year)
+    
+    dfSlice$State<- factor(dfSlice$State, levels = dfSlice$State[order(dfSlice$Crude.Rate)])
+    
+    ggplot(dfSlice, aes(x=State, y=Crude.Rate)) +
+    geom_line()+geom_point()+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    
+  })
+  
+})
+
+
+
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
+```{r}
+ui <- fluidPage(
+  headerPanel('CDC Mortality 1999-2010'),
+  
+  
+  sidebarPanel(
+    selectInput('icd', 'ICD.Chapter', unique(df$ICD.Chapter), selected = 'Certain infectious and parasitic diseases'),
+    selectInput('state', 'State', unique(df$State),selected = 'AL')
+  ),
+  
+  
+  mainPanel(
+    plotOutput('plot1')
+  )
+)
+
+
+server <- shinyServer(function(input, output, session) {
+  
+  selectedData <- reactive({
+    dfSlice <- df %>%
+      filter(ICD.Chapter == input$icd, state == input$state)   
+  })
+  
+
+  
+  output$plot1 <- renderPlot(
+    
+    {
+      df$Deaths_Rate <-  as.double(df$Deaths/df$Population*1000)
+      df$Year <- as.factor(df$Year)
+      df$nation_Death_Rate <- ave(df$Deaths_Rate,df$Year)
+      df$stat_nation_Rate<-df$Deaths_Rate-df$nation_Death_Rate
+    
+    dfSlice <- df %>% 
+       filter(ICD.Chapter == input$icd, State == input$state)
+    
+
+  ggplot(data=dfSlice, aes(x=Year, y=stat_nation_Rate)) +
+  geom_line()+ geom_point() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    
+  })
+  
+})
+
+
+
+shinyApp(ui = ui, server = server)
+```
