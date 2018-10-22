@@ -33,9 +33,7 @@ Bronxdf=get_data('Bronx')
 Manhattandf=get_data('Manhattan')
 Brooklyndf=get_data('Brooklyn')
 Queensdf=get_data('Queens')
-
-#Will add Staten Island later once figure the url for the json data
-#StatenIslanddf=get_data('Staten Island')
+StatenIslanddf=get_data('Staten%20Island')
 
 
     
@@ -109,8 +107,22 @@ app.layout = html.Div(children=[
                 'title': 'Dash Data Visualization Queens'
             }
         }
-    )
+    ),
     
+    dcc.Graph(
+        id='Staten Island',
+        figure={
+            'data': [
+                {'x': StatenIslanddf.index, 'y': StatenIslanddf['Fair_perc'].values, 'type': 'bar', 'name': 'Fair_perc'},
+                {'x': StatenIslanddf.index, 'y': StatenIslanddf['Good_perc'].values, 'type': 'bar', 'name': 'Good_perc'},
+                {'x': StatenIslanddf.index, 'y': StatenIslanddf['Poor_perc'].values, 'type': 'bar', 'name': 'Poor_perc'},
+              
+            ],
+            'layout': {
+                'title': 'Dash Data Visualization Staten Island'
+            }
+        }
+    ),
     
 ])
 
