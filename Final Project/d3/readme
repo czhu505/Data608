@@ -1,1 +1,2 @@
 These are the files for flight data working in d3, js, and html. 
+The future improve in d3 will consider how to work in mutiple chart on one web pages. The difficulty in combining two chart and work with mouse interaction in each chart, may be fixed while put the chart in seperate container, also change setting for global variables/function. Yet, if eveything seperated, there are more code repeated. 
