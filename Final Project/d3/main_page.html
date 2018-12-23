@@ -1,19 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<title>I like dogs!</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
 </head>
 <body>
- 	<h1 style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;">2015 US Flight Delay and Cancellations</h1>
+<center>
+ 	<h1 style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;">
+     <font size="5">2015 US Flight Delay and Cancellations</font></h1>
     <ul>
-	<p style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;">The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics tracks the on-time performance of domestic flights operated by large air carriers. Summary information on the number of on-time, delayed, canceled, and diverted flights is published in DOT's monthly Air Travel Consumer Report and in this dataset of 2015 flight delays and cancellations.<br>
-    <br><a href="https://www.kaggle.com/usdot/flight-delays">https://www.kaggle.com/usdot/flight-delays</p>
+	<p style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;">
+    <font size="3">
+    The U.S. Department of Transportation's (DOT) Bureau of Transportation Statistics tracks 
+    the on-time performance of domestic flights operated by large air carriers. Summary information 
+    on the number of on-time, delayed, canceled, and diverted flights is published in DOT's monthly 
+    Air Travel Consumer Report and in this dataset of 2015 flight delays and cancellations.<br>
+    <br><a href="https://www.kaggle.com/usdot/flight-delays">https://www.kaggle.com/usdot/flight-delays</a> 
+    </font>
+    </p> 
 	</ul>
-	<ul>
-		<li>Airline monthly arrival delay:<a href="index_test.html">My Page</a> </li>
-		<li>Airline monthly arrival delay:<a href="dash.py">My Page</a> </li></li>
-		<li></li>
-	</ul>
+    
+    <!--Plotly.js-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" ></script>
+    <div class="showcase__section" id="bubble">
+    <div class="spacer --small"></div>
+    <div id="bubbleplots">
+        <div class="bubbleplot" data-num="0">
+        <div class="plot" id="plotdiv"></div>
+        <div class="control-row">
+            Airline: <select class="airlinedata">
+            </select>
+        </div>
+        </div>
+    </div>
+    </div>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3><font size="3" color="red"> 2015 All Airline Arrival_Delay in Minutes: </font></h3>
+    <p><font size="3" color="red"> Min      -87  </font></p>
+    <p><font size="3" color="red"> Max     1971  </font></p>
+    <p><font size="3" color="red"> Median    -5  </font></p>
+    <br>
+    <br>
+    <div style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;"> <font size="3">
+    The line chart at below gives a sequency 12 month median  delay time for every US airline 
+    company in 2015. I grouped by columns "Month" and "Airline", used .median function to get 
+    this result. The data saved into .Json formate and used d3.json to read data. 
+    </font>
+    </div>
+    <br>
+    <br>
+    <!-- Custom JS -->
+    <script src="d3_dropdown.js"></script>
+    <svg width="960" height="500"></svg>
+
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="line-style.css" >
+    <script src="https://d3js.org/d3.v3.min.js" ></script>
+    <!-- Custom JS -->
+    <script src="d3-line.js" ></script>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3><font size="3" color="red"> 2015 All Airline Arrival_Delay : 36.52%</font></h3>
+    <p><font size="3" color="red"> False    3627112  </font></p>
+    <p><font size="3" color="red"> True     2086896  </font></p>
+    <br>
+    <p><font size="3" color="red"> Check which Airline has the highest probability in Arrival_Delay : </font></p>
+    <br>
+</center>
+<center>
+    <div style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;"><font size="3">
+    The bar chart at below gives %_delay for every US airline company in 2015. I set up the 
+    condition when "Arrival_Delay" > 0, then replace False, else True. After that, I used count found 
+    the number of delay fligh for each airline, and divied it by the subtotal number of flight in 
+    2015. The data saved into .tsv formate and used d3.tsv to read data. 
+    </font>
+    </div>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="bar-style.css" >
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <br>
+    <!-- Custom JS -->
+    <script src="d3-bar.js"></script>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+
+
+            
+</center>
 </body>
 </html>
