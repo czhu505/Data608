@@ -7,7 +7,7 @@
 <body>
 <center>
  	<h1 style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;">
-     <font size="8" color='darkblue'>2015 US Flight Delay and Cancellations</font></h1>
+     <font size="8" color='darkblue'>2015 US Flight Delay</font></h1>
      <ul><h1><font size="3", color="darkgrey">Data 608 Final Project</font></h1></ul>
      <ul><h1><font size="3", color="darkgrey">Chunhui Zhu</font></h1></ul>
      <br>
@@ -58,9 +58,9 @@
     <br>
     <br>
     <h3><font size="3" color="darkred"> 2015 All Airline Arrival_Delay in Minutes: </font></h3>
-    <p><font size="3" color="darkred"> Min      -87  </font></p>
-    <p><font size="3" color="darkred"> Max     1971  </font></p>
-    <p><font size="3" color="darkred"> Median    -5  </font></p>
+    <p><font size="3" color="darkred"> Min      -87 min </font></p>
+    <p><font size="3" color="darkred"> Max     1971 min </font></p>
+    <p><font size="3" color="darkred"> Median    -5 min </font></p>
     <br>
     <br>
     <div style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;"> <font size="3">
@@ -74,25 +74,22 @@
     <!-- Custom JS -->
     <script src="d3_dropdown.js"></script>
     <svg width="960" height="500"></svg>
-
     <!-- Custom styling -->
     <link rel="stylesheet" href="line-style.css" >
-    <script src="https://d3js.org/d3.v3.min.js" ></script>
     <!-- Custom JS -->
     <script src="d3-line.js" ></script>
     <br>
     <br>
     <br>
     <br>
-    <br>
+    </center>
+    <center>
     <h3><font size="3" color="darkred"> 2015 All Airline Arrival_Delay : 36.52%</font></h3>
-    <p><font size="3" color="darkred"> False    3627112  </font></p>
-    <p><font size="3" color="darkred"> True     2086896  </font></p>
+    <p><font size="3" color="darkred"> Total OnTime    #3,627,112  </font></p>
+    <p><font size="3" color="darkred"> Total Delay     #2,086,896  </font></p>
     <br>
     <p><font size="3" color="darkred"> Check which Airline has the highest probability in Arrival_Delay : </font></p>
     <br>
-</center>
-<center>
     <div style="margin-left: 2.5em;padding: 0 7em 2em 0;border-width: 2px;"><font size="3">
     The bar chart at below gives %_delay for every US airline company in 2015. I set up the 
     condition when "Arrival_Delay" > 0, then replace False, else True. After that, I used count found 
@@ -100,22 +97,30 @@
     2015. The data saved into .tsv formate and used d3.tsv to read data. 
     </font>
     </div>
-    <script src="https://d3js.org/d3.v3.min.js"></script>
     <!-- Custom styling -->
     <link rel="stylesheet" href="bar-style.css" >
     <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
     <br>
     <!-- Custom JS -->
     <script src="d3-bar.js"></script>
+    </center>
+    <br>
+    <br>
+    <br>
+    <center>
+    <h3><font size="3" color="darkred"> 2015 Flight Delay Probablility by Cities : </font></h3>
+    <p><font size="3" color="darkred"> Min      9.644%  </font></p>
+    <p><font size="3" color="darkred"> Max        100% </font></p>
+    <p><font size="3" color="darkred"> Median  37.888% </font></p>
     <br>
     <br>
     <br>
     <br>
     <br>
-    
-
-
-            
+    <!-- Plotly chart will be drawn inside this DIV -->
+    <div id="myDiv"></div>
+    <!-- Custom JS -->
+    <script src="d3-map.js"></script>       
 </center>
 </body>
 </html>
