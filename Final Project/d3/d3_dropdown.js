@@ -48,7 +48,7 @@ function setBubblePlot(chosenAirline) {
     var data = [trace1];
 
     var layout = {
-    title: '2015 Monthly Airline Arrival Delay<br>'+ chosenAirline + ' (Minutes)'
+    title: '2015 Monthly Airline Arrival Delay<br>'+ chosenAirline + ' (Minutes_Median)'
     };
 
     Plotly.newPlot('plotdiv', data, layout, {showSendToCloud: true});

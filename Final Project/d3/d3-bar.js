@@ -42,7 +42,7 @@ var svg = d3.select("body").append("svg")
 
 svg.call(tip);
 
-d3.tsv("perct_delay.tsv", type, function(error, data) {
+d3.tsv("https://raw.githubusercontent.com/czhu505/Data608/master/Final%20Project/d3/perct_delay.tsv", type, function(error, data) {
   x.domain(data.map(function(d) { return d.AIRLINE; }));
   y.domain([0, d3.max(data, function(d) { return d.perct_delay; })]);
 
