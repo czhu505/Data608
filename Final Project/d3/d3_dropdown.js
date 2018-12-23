@@ -1,16 +1,16 @@
 
-Plotly.d3.csv('https://raw.githubusercontent.com/czhu505/Data608/master/Final%20Project/data/arr_delay_month.csv', function(err, rows){
+Plotly.d3.csv('https://raw.githubusercontent.com/czhu505/Data608/master/Final%20Project/data/arr_delay_dest.csv', function(err, rows){
 
 function unpack(rows, key) {
         return rows.map(function(row) { return row[key]; });
     }
 
 var allAirlineNames = unpack(rows, 'AIRLINE'),
-    allMonth = unpack(rows, 'MONTH'),
+    allDest = unpack(rows, 'Distance'),
     allDelay = unpack(rows, 'ARRIVAL_DELAY'),
     listofAirlines = [],
     currentDelay = [],
-    currentMonth = [];
+    currentDest = [];
 
 for (var i = 0; i < allAirlineNames.length; i++ ){
     if (listofAirlines.indexOf(allAirlineNames[i]) === -1 ){
@@ -20,11 +20,11 @@ for (var i = 0; i < allAirlineNames.length; i++ ){
 
 function getAirlineData(chosenAirline) {
     currentDelay = [];
-    currentMonth = [];
+    currentDest = [];
     for (var i = 0 ; i < allAirlineNames.length ; i++){
     if ( allAirlineNames[i] === chosenAirline ) {
         currentDelay.push(allDelay[i]);
-        currentMonth.push(allMonth[i]);
+        currentDest.push(allDest[i]);
     } 
     }
 };
@@ -36,7 +36,7 @@ function setBubblePlot(chosenAirline) {
     getAirlineData(chosenAirline);  
 
     var trace1 = {
-    x: currentMonth,
+    x: currentDest,
     y: currentDelay,
     mode: 'lines+markers',
     marker: {
@@ -48,7 +48,7 @@ function setBubblePlot(chosenAirline) {
     var data = [trace1];
 
     var layout = {
-    title: '2015 Monthly Airline Arrival Delay<br>'+ chosenAirline + ' (Minutes_Median)'
+    title: '2015 Airline Arrival Delay (Minutes) <br>vs Destance (Miles)'+' : ' +chosenAirline 
     };
 
     Plotly.newPlot('plotdiv', data, layout, {showSendToCloud: true});
